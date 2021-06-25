@@ -8,3 +8,7 @@ Start local project with website emulator  :
 > npm run build
 
 > swa start .\build --api .\api\getFacts\
+
+to run with bring your own function run
+
+> swa start .\build --api "http://localhost:7073" 

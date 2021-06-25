@@ -6,7 +6,7 @@ const appLoadedHandler = () => ({ dispatch }) => next => action => {
 
     if (action.type === APP_LOADED) {
         console.log('page loaded');
-        dispatch(commands.loadFacts);
+        // dispatch(commands.loadFacts);
         dispatch(commands.loadAuth);
         dispatch(commands.loadSentiment);
     }

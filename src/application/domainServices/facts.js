@@ -11,8 +11,8 @@ const loadFactsHandler = ({ facts }) => ({ dispatch }) => next => async (action)
     if (action.type === FACT_LOADING) {
         try {
             dispatch(uiCommands.setLoading(true));
-            const factsData = await facts.getFacts();
-            dispatch(loadFactsSuccess(factsData));
+            // const factsData = await facts.getFacts();
+            // dispatch(loadFactsSuccess(factsData));
             dispatch(uiCommands.setLoading(false));
         } catch (error) {
             dispatch(loadFactsFailure(error));

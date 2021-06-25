@@ -16,14 +16,21 @@ import * as uiCommands from './application/commands/ui';
 function App() {
   const dispatch = useDispatch();
   const value = 'World';
-  const loading = useSelector(selectors.getLoading);
-  const facts = useSelector(selectors.getFacts);
-  const errors = useSelector(selectors.getFactsLoadingError);
-  const tabName = useSelector(selectors.getTab);
+  // const loading = useSelector(selectors.getLoading);
+  // const facts = useSelector(selectors.getFacts);
+  // const errors = useSelector(selectors.getFactsLoadingError);
+  const tabName = "sentiment";//useSelector(selectors.getTab);
   const me = useSelector(selectors.getAuth);
-  console.log('errors:', errors);
-  console.log('facts', facts);
+  // console.log('errors:', errors);
+  // console.log('facts', facts);
+  const sentiment = useSelector(selectors.getSentiment);
+  const sentimenterror = useSelector(selectors.getSentimentError);
+  console.log('sentiment data',sentiment, sentimenterror);
+  if(sentiment) {
+    console.log(typeof(sentiment.headers));
+  }
   console.log('tabName',tabName);
+  console.log("env", process.env);
 
   useEffect(() => {
       dispatch(uiCommands.appLoaded);
@@ -62,8 +69,7 @@ height="28"
         </div>)
         }
       </Navbar.Link>
-      <Navbar.Container position="end" align = "right">
-        <Navbar.Item href="#" onClick = {() => dispatch(uiCommands.setTab("facts"))}>Earth Facts</Navbar.Item>
+      <Navbar.Container position="end" align = "left">
       {/* </Navbar.Container>
       <Navbar.Container position="end" align = "right"> */}
         <Navbar.Item href="#" onClick = {() => dispatch(uiCommands.setTab("sentiment"))}>Earth Sentiment</Navbar.Item>
@@ -82,55 +88,31 @@ height="28"
           </div>
         </div>
 
-        {errors !=null 
-          ? ('Loading error' + errors) 
-          : ( 
-            loading ? 'Loading earth facts...' 
-            :(
-          <div id="app" className="row columns is-multiline">
-            <div v-for="card in cardData" key="card.id" className="column is-4">
-              <div className="card large">
-                <div className="card-image">
-                  <figure className="image is-16by16">
-                    <img src="07bluemarbleearth_thumbnail.jpg" alt="Image"/>
-                  </figure>
-                </div>
-                <div className="card-content">
-                  <div className="media">
-                    <div className="media-left">
-                      <figure className="image is-48x48">
-                        {/* <img :src="card.avatar" alt="Image"> */}
-                      </figure>
-                    </div>
-                    <div className="media-content">
-                    {facts.recommendedFact.title}
-                      {/* <p className="title is-4 no-padding">{{card.user.title}}</p> */}
-                      <p/>
-                        <span className="title is-6"/>
-                        {facts.recommendedFact.details}
-                          {/* <a :href=`http://twitter.com/${card.user.handle}`> {{card.user.handle}} </a> </span> </p> */}
-                      {/* <p className="subtitle is-6">{{card.user.title}}</p> */}
-                    </div>
-                  </div>
-                  <div className="content">
-                    {/* {{card.content}} */}
-                    <div className="background-icon"><span className="icon-twitter"></span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>)
-          )
-        }
+        
       </div>
-       ) 
-       : ('sentiment demo UI :')}
+       ): 
+        sentimenterror!= null 
+       ? ('Loading error' + sentimenterror) 
+       : sentiment == null || sentiment.headers == null
+        ? ('sentiment demo UI : loading....')
+        : (
+          <div>
+            <p><b>Headers:</b></p>
+            <ul>
+              <li>
+              {Object.entries(sentiment.headers).map((header) =>
+                <li key={header}>
+                  {header}
+                </li>
+              )}
+              </li>
+            </ul>
+          </div>
+        )
+      }
 
       <div>Hello {value} ! 2021</div>
-      
      
-
-
     </div>
   </Section>;
 }

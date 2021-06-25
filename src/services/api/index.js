@@ -18,11 +18,19 @@ export const testApi =
     }
 }
 
+export const devSentimentApi = 
+{
+    getSentiment: async (topic) => {
+        const response = await axios.get('http://localhost:7073/api/GetSentiment?topic='+ topic);
+
+        return response.data
+    }
+}
 
 export const sentimentApi = 
 {
     getSentiment: async (topic) => {
-        const response = await axios.get('http://localhost:7073/api/GetSentiment?topic='+ topic);
+        const response = await axios.get('api/GetSentiment?topic='+ topic);
 
         return response.data
     }
