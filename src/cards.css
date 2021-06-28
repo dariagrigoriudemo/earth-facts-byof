@@ -4,7 +4,8 @@
   }
   
   body {
-    background: var(--bg);
+    background: var(--card-bg);
+    color : ghostwhite;
   }
   
   .box {

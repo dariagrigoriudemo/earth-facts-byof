@@ -5,6 +5,7 @@ import './cards.css';
 import { Button , Section, Navbar, hoverable , dropdown} from 'react-bulma-components';
 import * as selectors  from './application/selectors';
 import * as uiCommands from './application/commands/ui';
+import ReactWordcloud from 'react-wordcloud';
 
 // const styles = {
 //   container: {
@@ -36,6 +37,12 @@ function App() {
       dispatch(uiCommands.appLoaded);
   }, [dispatch]);
 
+  const callbacks = {
+    getWordColor: word => word.value > 4 ? "green": word.value >1 ? "blue" : "red",
+    onWordClick: console.log,
+    onWordMouseOver: console.log
+    //getWordTooltip: word => `${word.text} (${word.value}) [${word.value > 50 ? "good" : "bad"}]`,
+  }
   return <Section>
 
   <Navbar fixed>
@@ -97,7 +104,10 @@ height="28"
         ? ('sentiment demo UI : loading....')
         : (
           <div>
-            <p><b>Headers:</b></p>
+            <ReactWordcloud 
+            callbacks={callbacks}   
+            words={sentiment.tokens} />
+            {/* <p><b>Headers:</b></p>
             <ul>
               <li>
               {Object.entries(sentiment.headers).map((header) =>
@@ -106,7 +116,7 @@ height="28"
                 </li>
               )}
               </li>
-            </ul>
+            </ul> */}
           </div>
         )
       }
