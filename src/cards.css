@@ -2,7 +2,11 @@
     --bg: #071e36;
     --card-bg: #041221;
   }
-  
+
+  html, body, #app, #app>div {
+    height: 100%
+  }
+
   body {
     background: var(--card-bg);
     color : ghostwhite;

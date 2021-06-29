@@ -43,7 +43,7 @@ function App() {
     onWordMouseOver: console.log
     //getWordTooltip: word => `${word.text} (${word.value}) [${word.value > 50 ? "good" : "bad"}]`,
   }
-  return <Section>
+  return <Section height="100%">
 
   <Navbar fixed>
     {/* <Navbar.Brand>
@@ -76,7 +76,7 @@ height="28"
         </div>)
         }
       </Navbar.Link>
-      <Navbar.Container position="end" align = "left">
+      <Navbar.Container position="end" align = "right">
       {/* </Navbar.Container>
       <Navbar.Container position="end" align = "right"> */}
         <Navbar.Item href="#" onClick = {() => dispatch(uiCommands.setTab("sentiment"))}>Earth Sentiment</Navbar.Item>
@@ -104,7 +104,7 @@ height="28"
         ? ('sentiment demo UI : loading....')
         : (
           <div>
-            <ReactWordcloud 
+            <ReactWordcloud  
             callbacks={callbacks}   
             words={sentiment.tokens} />
             {/* <p><b>Headers:</b></p>
@@ -120,9 +120,6 @@ height="28"
           </div>
         )
       }
-
-      <div>Hello {value} ! 2021</div>
-     
     </div>
   </Section>;
 }

@@ -50,7 +50,7 @@ const loadAuthHandler = ({ auth }) => ({ dispatch }) => next => async (action) =
 
     console.log(action.type)
 
-    if (action.type === FACT_LOADING) {
+    if (action.type === FACT_LOADING || action.type === SENTIMENT_LOADING) {
         try {
             const authData = await auth.getAuth();
             dispatch(uiCommands.setAuth(authData));
